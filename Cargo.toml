@@ -1,0 +1,9 @@
+[package]
+name = "ising2d"
+version = "0.1.0"
+authors = ["toru3"]
+
+[dependencies]
+num = "0.1"
+rand = "0.4.2"
+time = "0.1"
