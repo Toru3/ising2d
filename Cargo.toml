@@ -6,4 +6,3 @@ authors = ["toru3"]
 [dependencies]
 num = "0.1"
 rand = "0.4.2"
-time = "0.1"

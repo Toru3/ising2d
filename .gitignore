@@ -1,3 +1,5 @@
-
+*
+!.gitignore
+!Cargo.toml
 /target/
 **/*.rs.bk
