@@ -9,7 +9,7 @@ use std::time::Instant;
 use std::fs;
 use std::io::{BufWriter, Write};
 
-fn rand_ising2d(n: usize, rng: &mut rand::XorShiftRng) -> Vec<i8> {
+fn rand_ising2d(n: usize, rng: &mut rand::XorShiftRng) -> Vec<i32> {
     let mut a = Vec::with_capacity(n * n);
     let between = Range::new(0, 2);
     for _ in 0..n * n {
@@ -18,7 +18,7 @@ fn rand_ising2d(n: usize, rng: &mut rand::XorShiftRng) -> Vec<i8> {
     a
 }
 
-fn ising2d_sum_of_adjacent_spins(s: &Vec<i8>, m: usize, n: usize, i: usize, j: usize) -> i8 {
+fn ising2d_sum_of_adjacent_spins(s: &Vec<i32>, m: usize, n: usize, i: usize, j: usize) -> i32 {
     s[if i < m - 1 { i + 1 } else { 0 } * n + j] + s[if i > 0 { i - 1 } else { m - 1 } * n + j] +
         s[i * n + if j < n - 1 { j + 1 } else { 0 }] +
         s[i * n + if j > 0 { j - 1 } else { n - 1 }]
@@ -27,7 +27,7 @@ fn ising2d_sum_of_adjacent_spins(s: &Vec<i8>, m: usize, n: usize, i: usize, j: u
 fn ising2d_sweep(
     m: usize,
     n: usize,
-    s: &mut Vec<i8>,
+    s: &mut Vec<i32>,
     beta: f64,
     ntiers: usize,
     rng: &mut rand::XorShiftRng,
@@ -47,7 +47,7 @@ fn ising2d_sweep(
     }
 }
 
-fn print_ppm(filename: &str, m: usize, n: usize, s: &Vec<i8>) {
+fn print_ppm(filename: &str, m: usize, n: usize, s: &Vec<i32>) {
     let mut f = BufWriter::new(fs::File::create(filename).unwrap());
     f.write(b"P1\n").unwrap();
     f.write(format!("{} {}\n", n, m).as_bytes()).unwrap();
